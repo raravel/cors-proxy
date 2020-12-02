@@ -4,7 +4,7 @@
 	"author": "raravel",
 	"license": "MIT",
 	"scripts": {
-		"dev": "nodemon --watch src --watch package.json --watch tsconfig.js --delay 1 --exec 'npm run lint && cross-env NODE_ENV=developement ts-node' src/index.ts",
+		"dev": "nodemon --watch src --watch package.json --watch tsconfig.js --delay 1 --exec 'npm run lint && cross-env NODE_ENV=developement cross-env CERT_DIR=/home/youn/ ts-node' src/index.ts",
 		"lint": "tslint -p .",
 		"build": "tsc"
 	},
