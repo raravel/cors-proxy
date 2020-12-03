@@ -7,7 +7,7 @@ import https from 'https';
 import fs from 'fs';
 import path from 'path';
 
-const IS_DEV = process.env.NODE_ENV === 'developement';
+const IS_DEV = process.env.NODE_ENV === 'development';
 const HEADER_PREFIX = 'cors-proxy-';
 const app = Express();
 
@@ -54,6 +54,7 @@ const options = {
 	key: fs.readFileSync(path.join(process.env.CERT_DIR as string, 'private.pem'), {encoding:'utf8'}),
 	cert: fs.readFileSync(path.join(process.env.CERT_DIR as string, 'server.crt'), {encoding:'utf8'})
 };
+
 if ( IS_DEV ) {
 	const httpServer = http.createServer(app);
 	httpServer.listen(3080, () => {
