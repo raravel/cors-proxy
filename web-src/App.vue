@@ -16,19 +16,23 @@
 
 			<v-spacer></v-spacer>
 
-			<v-btn text height="100%" color="orange darken-4" tile>
+			<v-btn @click="$assign('/')" text height="100%" color="orange darken-4" tile>
 				Home
 				<v-icon class="ml-2">
 					mdi-home
 				</v-icon>
 			</v-btn>
-			<v-btn text height="100%" color="orange darken-4" tile>
+			<v-btn @click="$assign('/docs')" text height="100%" color="orange darken-4" tile>
 				Docs
 				<v-icon class="ml-2">
 					mdi-notebook-multiple
 				</v-icon>
 			</v-btn>
-			<v-btn text height="100%" color="orange darken-4" tile>
+			<v-btn
+				text
+				@click="open('https://github.com/raravel/cors-proxy');"
+				height="100%"
+				color="orange darken-4" tile>
 				GITHUB
 				<v-icon class="ml-2">
 					mdi-github
@@ -37,7 +41,7 @@
 		</v-app-bar>
 		<v-sheet id="router-view" tile :key="$route.fullPath" class="h-100v" style="overflow-y: auto;">
 			<transition name="scroll-y-reverse-transition">
-				<router-view style="margin-top: 64px;"/>
+				<router-view style="margin-top: 128px;"/>
 			</transition>
 		</v-sheet>
 	</v-app>
@@ -53,7 +57,11 @@ html, body {
 <script>
 export default {
 	name: 'App',
-
+	methods: {
+		open(url) {
+			window.open(url);
+		}
+	},
 	data() {
 		return {
 			imgs: {

@@ -9,6 +9,11 @@ export const routes = [
 		path: '/',
 		component: () => import('@/views/Home/Index.vue'),
 	},
+	{
+		name: 'Docs',
+		path: '/docs',
+		component: () => import('@/views/Docs/Index.vue'),
+	},
 ];
 
 const router = new VueRouter({
