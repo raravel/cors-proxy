@@ -21,9 +21,17 @@ const CORSProxyHeader = (req: Express.Request, key: string) => {
 	return val;
 };
 
-app.all('/', async (req: Express.Request, res: Express.Response) => {
+const WEB_ROOT = path.resolve(__dirname, process.env.WEB_ROOT || 'public');
+app.use('/', Express.static(WEB_ROOT));
+
+app.get('/', (req: Express.Request, res: Express.Response) => {
+	res.sendFile(path.join(WEB_ROOT, 'index.html'));
+});
+
+app.all('/api', async (req: Express.Request, res: Express.Response) => {
 	const dstURL: string = CORSProxyHeader(req, 'url') as string;
 	if ( dstURL ) {
+		console.log(`Request [${dstURL}] Method [${req.method}]`);
 		try {
 			const reqConfig = {
 				url: dstURL,
@@ -52,7 +60,8 @@ app.all('/', async (req: Express.Request, res: Express.Response) => {
 
 const options = {
 	key: fs.readFileSync(path.join(process.env.CERT_DIR as string, 'private.pem'), {encoding:'utf8'}),
-	cert: fs.readFileSync(path.join(process.env.CERT_DIR as string, 'server.crt'), {encoding:'utf8'})
+	cert: fs.readFileSync(path.join(process.env.CERT_DIR as string, 'server.crt'), {encoding:'utf8'}),
+	ca: fs.readFileSync(path.join(process.env.CERT_DIR as string, 'ca-chain-bundle.pem'), {encoding:'utf8'}),
 };
 
 if ( IS_DEV ) {

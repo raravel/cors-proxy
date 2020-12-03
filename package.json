@@ -4,10 +4,14 @@
 	"author": "raravel",
 	"license": "MIT",
 	"scripts": {
-		"server:dev": "nodemon --watch src --watch package.json --watch tsconfig.js --delay 1 --exec 'npm run lint && cross-env NODE_ENV=development cross-env CERT_DIR=/home/youn/ ts-node' src/index.ts",
+		"server:dev": "nodemon --watch src --watch package.json --watch tsconfig.js --delay 1 --exec 'npm run lint && cross-env NODE_ENV=development cross-env CERT_DIR=/home/youn/ cross-env WEB_ROOT=../web-dist ts-node' src/index.ts",
+		"server:test": "cross-env NODE_ENV=production cross-env CERT_DIR=/home/youn/ cross-env WEB_ROOT=../web-dist ts-node src/index.ts",
+		"server:build": "tsc",
 		"vue:dev": "cross-env NODE_ENV=development vue-cli-service serve",
+		"vue:build": "cross-env NODE_ENV=production vue-cli-service build",
 		"lint": "tslint -p .",
-		"build": "tsc"
+		"build": "npm run vue:build && npm run server:build && cp -r web-dist/ dist/public && cp package.json dist",
+		"service": "cross-env CERT_DIR=/home/opc pm2 start index.js"
 	},
 	"devDependencies": {
 		"@types/cors": "^2.8.8",

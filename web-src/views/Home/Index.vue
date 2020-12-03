@@ -55,7 +55,7 @@
 		<v-row align="center" style="height: 200px; background-color: #f1f1f1;" class="ma-0 mt-6">
 			<v-col cols="12" align="center">
 				<h2>{{ $t('home.now-start') }}</h2>
-				<v-btn class="mt-4" tile color="orange darken-1" dark>
+				<v-btn @click="$assign('/docs')" class="mt-4" tile color="orange darken-1" dark>
 					{{ $t('home.docs') }}
 				</v-btn>
 			</v-col>

@@ -17,9 +17,10 @@ module.exports = {
 			historyApiFallback: true,
 		},
 		output: {
-			filename: "web-dist/[name].js",
-			chunkFilename: "web-dist/[name].js",
+			filename: "dist/[name].js",
+			chunkFilename: "dist/[name].js",
 		},
 	},
 	transpileDependencies: ["vuetify"],
+	outputDir: path.resolve(__dirname, 'web-dist'),
 };
